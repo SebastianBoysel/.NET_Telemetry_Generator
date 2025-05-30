@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telemetry-gen
+  labels:
+    app: telemetry-gen
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telemetry-gen
+  template:
+    metadata:
+      labels:
+        app: telemetry-gen
+    spec:
+      containers:
+      - name: telemetry-gen
+        image: telemetry-gen:latest
+        imagePullPolicy: Never  # Use local image for K3s
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "50m"
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
